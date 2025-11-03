@@ -15,6 +15,11 @@ import config
 app = Flask(__name__)
 app.config.from_object(config)
 
+# Force HTTPS redirects when behind Azure proxy
+from werkzeug.middleware.proxy_fix import ProxyFix
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
+app.config['PREFERRED_URL_SCHEME'] = 'https'
+
 # Initialize database
 db.init_app(app)
 
