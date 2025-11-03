@@ -11,6 +11,9 @@ from parser import ResumeParser
 from ai_client import GeminiClient
 from utils import login_required
 import config
+import sys
+import os
+
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -42,6 +45,22 @@ resume_parser = ResumeParser()
 gemini_client = GeminiClient(api_key=app.config['GOOGLE_API_KEY'])
 
 ALLOWED_EXTENSIONS = {'pdf', 'docx'}
+
+
+
+# Add parent directory to path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from app import app
+from models import db
+
+def init_database():
+    """Initialize database with tables"""
+    with app.app_context():
+        # Create all tables
+        db.create_all()
+        print("Database initialized successfully!")
+        print(f"Database location: {app.config['SQLALCHEMY_DATABASE_URI']}")
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -247,7 +266,12 @@ def not_found(e):
 def internal_error(e):
     return jsonify({'error': 'Internal server error'}), 500
 
-if __name__ == '__main__':
-    with app.app_context():
+
+init_database()
+with app.app_context():
         db.create_all()
+
+
+if __name__ == '__main__':
+    
     app.run(host='0.0.0.0', port=5000, debug=True)
