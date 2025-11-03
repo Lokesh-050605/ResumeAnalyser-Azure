@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Login - ResumeAnalyser{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-5 text-center">
+                        <div class="mb-4">
+                            <i class="bi bi-file-earmark-text-fill text-primary" style="font-size: 4rem;"></i>
+                        </div>
+                        
+                        <h1 class="h3 mb-3 fw-bold">Welcome to ResumeAnalyser</h1>
+                        <p class="text-muted mb-4">
+                            Analyze your resume with AI-powered insights. Get personalized suggestions, 
+                            skill assessments, and job match scores.
+                        </p>
+                        
+                        <div class="d-grid gap-3">
+                            <a href="{{ url_for('login') }}" class="btn btn-lg btn-primary">
+                                <i class="bi bi-google me-2"></i>
+                                Sign in with Google
+                            </a>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <p class="small text-muted">
+                                <i class="bi bi-shield-check text-success"></i>
+                                Your data is secure and private
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <div class="row g-3">
+                        <div class="col-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-lightning-charge-fill text-warning"></i>
+                                <p class="small mt-2 mb-0">Fast Analysis</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-graph-up text-success"></i>
+                                <p class="small mt-2 mb-0">AI Insights</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-cloud-upload text-info"></i>
+                                <p class="small mt-2 mb-0">Cloud Storage</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
